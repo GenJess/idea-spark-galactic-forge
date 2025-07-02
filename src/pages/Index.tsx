@@ -71,7 +71,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto p-6">
           {!result ? (
             /* Welcome State */
-            <div className="min-h-[80vh] flex flex-col items-center justify-center text-center space-y-8">
+            <div className="min-h-[60vh] flex flex-col items-center justify-start pt-16 text-center space-y-8">
               <div className="space-y-6">
                 <div className="flex items-center justify-center gap-3 mb-4">
                   <Sparkles className="h-12 w-12 text-accent animate-pulse-cosmic" />
@@ -101,15 +101,35 @@ const Index = () => {
               <IdeaInput onSubmit={handleIdeaSubmit} isLoading={isLoading} />
 
               {isLoading && (
-                <div className="space-y-4 text-center">
-                  <div className="flex items-center justify-center gap-2">
-                    <Sparkles className="h-5 w-5 animate-spin text-primary" />
-                    <span className="text-muted-foreground">Launching your idea through the galaxy...</span>
-                  </div>
-                  <div className="flex justify-center gap-1">
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 bg-secondary rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 bg-accent rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-md">
+                  <div className="relative">
+                    {/* Cosmic loading rings */}
+                    <div className="absolute inset-0 w-32 h-32 border-4 border-primary/30 rounded-full animate-spin" />
+                    <div className="absolute inset-2 w-28 h-28 border-4 border-secondary/30 rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }} />
+                    <div className="absolute inset-4 w-24 h-24 border-4 border-accent/30 rounded-full animate-spin" style={{ animationDuration: '2s' }} />
+                    
+                    {/* Center glow */}
+                    <div className="w-32 h-32 flex items-center justify-center">
+                      <div className="w-16 h-16 bg-gradient-cosmic rounded-full cosmic-glow animate-pulse-cosmic flex items-center justify-center">
+                        <Rocket className="h-8 w-8 text-white animate-bounce" />
+                      </div>
+                    </div>
+                    
+                    {/* Floating particles */}
+                    <div className="absolute -top-4 -left-4 w-2 h-2 bg-primary rounded-full animate-ping" />
+                    <div className="absolute -top-4 -right-4 w-2 h-2 bg-secondary rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
+                    <div className="absolute -bottom-4 -left-4 w-2 h-2 bg-accent rounded-full animate-ping" style={{ animationDelay: '1s' }} />
+                    <div className="absolute -bottom-4 -right-4 w-2 h-2 bg-primary rounded-full animate-ping" style={{ animationDelay: '1.5s' }} />
+                    
+                    {/* Text */}
+                    <div className="absolute top-40 left-1/2 transform -translate-x-1/2 text-center space-y-2">
+                      <p className="text-xl font-semibold gradient-text">Launching through the galaxy...</p>
+                      <div className="flex justify-center gap-1">
+                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce" />
+                        <div className="w-2 h-2 bg-secondary rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                        <div className="w-2 h-2 bg-accent rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
